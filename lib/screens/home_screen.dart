@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:multi_vendor/widget/banner_highlight.dart';
+import 'package:multi_vendor/widget/brand_highlight.dart';
 import 'package:multi_vendor/widget/banner_widget.dart';
 import 'package:multi_vendor/widget/category_widget.dart';
 

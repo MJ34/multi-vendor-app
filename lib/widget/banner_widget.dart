@@ -25,11 +25,11 @@ class _BannerWidgetState extends State<BannerWidget> {
 
   getBanner() {
     return _services.homeBanner.get().then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
+      for (var doc in querySnapshot.docs) {
         setState(() {
           _bannerImage.add(doc['image']);
         });
-      });
+      }
     });
   }
 
@@ -67,37 +67,19 @@ class _BannerWidgetState extends State<BannerWidget> {
                     scrollPosition = val.toDouble();
                   });
                 },
-                /*children: const [
-                    Center(
-                      child: Text(
-                        'Banner 1',
-                        style:
-                            TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'Banner 2',
-                        style:
-                            TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'Banner 3',
-                        style:
-                            TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                      ),
-                    )
-                  ],*/
               ),
             ),
           ),
         ),
-        Positioned(
-          bottom: 10.0,
-          child: DotsIndicatorWidget(scrollPosition: scrollPosition),
-        )
+        _bannerImage.isEmpty
+            ? Container()
+            : Positioned(
+                bottom: 10.0,
+                child: DotsIndicatorWidget(
+                  scrollPosition: scrollPosition,
+                  itemList: _bannerImage,
+                ),
+              )
       ],
     );
   }
@@ -107,9 +89,11 @@ class DotsIndicatorWidget extends StatelessWidget {
   const DotsIndicatorWidget({
     Key? key,
     required this.scrollPosition,
+    required this.itemList,
   }) : super(key: key);
 
   final double scrollPosition;
+  final List itemList;
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +103,7 @@ class DotsIndicatorWidget extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: DotsIndicator(
             position: scrollPosition,
-            dotsCount: 3,
+            dotsCount: itemList.length,
             decorator: DotsDecorator(
                 activeColor: Colors.blue,
                 spacing: const EdgeInsets.all(2),

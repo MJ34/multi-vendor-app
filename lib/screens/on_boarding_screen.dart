@@ -6,7 +6,7 @@ import 'package:multi_vendor/screens/main_screen.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
-  static const String id = 'onboard-screen';
+  static const String id = 'home-screen';
 
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
@@ -214,7 +214,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           'SKIP TO THE APP >',
                           style: TextStyle(fontSize: 20, color: Colors.white),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          onButtonPressed(context);
+                        },
                       ),
                 const SizedBox(
                   height: 20,
